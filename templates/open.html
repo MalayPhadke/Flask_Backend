@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link href="../static/style.css" type="text/css" rel="stylesheet">
+    </link>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+<nav>
+  <h1>Welcome to App</h1>
+  <ul>
+      <li><a class="register" href="{{ url_for('register') }}">Register</a>
+      <li><a class="login" href="{{ url_for('login') }}">Log In</a>
+  </ul>
+</nav>
+<p class="register">First time visiting our page? Click to register as a new user</p>
+<p class="login">Already a user? Click to login</p>
+{% if current_users|length == 0 %}
+<p style="color:blue;">There are no users currently in your database.</p>
+{% endif %}
+{% for user in current_users %}
+<li><bold>{{user}}</bold></li>
+{% endfor %}
+</body>
+</html>
+    

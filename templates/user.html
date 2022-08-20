@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link href="../static/style.css" type="text/css" rel="stylesheet">
+    </link>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+    <nav>
+      <h1>Welcome to App</h1>
+      <ul>
+          <li><a id="logout" href="{{ url_for('logout') }}">Log Out</a>
+      </ul>
+    </nav>
+    <center><h1>Welcome back {{ current_user.username }}!</h1></center>
+    {% for user in other_users %}
+    <p>{{user}}</p>
+    {% endfor %}
+    {% if community|length == 0 %}
+    <p style="color: darkblue;">Currenty there are no communities create.</p>
+    <a href="{{ url_for('community') }}"><button>Create a community!</button></a>
+    {% else %}
+    {% for comm in community %} 
+    <li>Community Name: {{ comm.name }}<br><a href="{{ url_for('fcommunity') }}"><button> Join</button></a></li>
+    {% endfor %}
+    <p><a id="post" href="{{ url_for('community') }}"><button>Create another community!</button></a></p>
+    {% endif %}
+    <table>
+      <tr valign="top">
+          <td>
+              <h1>User: {{ user.username }}</h1>
+              {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+              {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+              {% if user == current_user %}
+              <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+              {% endif %}
+          </td>
+      </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link href="../static/style.css" type="text/css" rel="stylesheet">
+    </link>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+    <center>
+        <h1 style="color:red">Register</h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}<br>
+    
+            </p>
+            <p>
+                {{ form.email.label }}<br>
+                {{ form.email(size=64) }}<br>
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}<br>
+            </p>
+            <p>
+                {{ form.password2.label }}<br>
+                {{ form.password2(size=32) }}<br>
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </center>
+    
+</body>
+</html>
+
